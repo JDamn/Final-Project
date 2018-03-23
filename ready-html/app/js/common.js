@@ -24,7 +24,7 @@ $(document).ready(function() {
         $icon.removeClass('is-active');
       }, 100);
     });
-  
+  //First carousel
   $('.carousel-services').on('initialized.owl.carousel', function(){
     setTimeout(function(){
       carouselService()
@@ -57,11 +57,50 @@ $(document).ready(function() {
     });
   }carouselService();
   
-  //Resize Window
   function onResize(){
     $('.carousel-services-content').equalHeights();
   }onResize();
   
   window.onresize = function () {onResize()};
+  
+  //Second carousel
+  $('.carousel-services-second').on('initialized.owl.carousel', function(){
+    setTimeout(function(){
+      carouselServiceSecond()
+    },100);
+  });
+  $('.carousel-services-second').owlCarousel({
+    loop: true,
+    nav: true,
+    smartSpeed: 700,
+    navText: ['<i class="fas fa-angle-double-left"></i>','<i class="fas fa-angle-double-right"></i>'],
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 1
+      },
+      800: {
+        items: 1
+      },
+      1100: {
+        items: 1
+      }
+    }
+  });
+  
+  function carouselServiceSecond(){
+    $('.carousel-services-second-item').each(function(){
+      var ths  = $(this), 
+          thsh = ths.find('.carousel-services-second-content').outerHeight();
+          ths.find('.carousel-services-second-image').css('min-height',thsh);
+    });
+  }carouselServiceSecond();
+  //Resize Window
+  
+  function onResizeSecond(){
+    $('.carousel-services-second-content').equalHeights();
+  }onResize();
+  
+  window.onresize = function () {onResizeSecond()};
   
 });

@@ -53,7 +53,6 @@ body
       background-color: $dark
       color: #fff
       .top-line
-        //padding-top: $gutter
         position: absolute
         width: 100%
         z-index: 1
@@ -398,6 +397,9 @@ $colors: $black, $black1, $black2
   position: absolute
   top: 0
   width: 100%
+
+.owl-dots
+  display: none
   
 .owl-carousel .owl-nav button.owl-prev
   width: 52px
@@ -473,5 +475,74 @@ $colors: $black, $black1, $black2
       &::before
         content: '\f104'
       
+//Second carousel \\ About me
+
+$colors: $black, $black1, $black2
+@for $i from 1 through length($colors)
+    .carousel-services-second .owl-item:nth-child(#{length($colors)}n+#{$i})
+      background-color: nth($colors, $i)
+
+.carousel-services-second
+  background-color: $dark
+  &-item
+    color: #fff
+    font-size: 18px
+    font-weight: 300
+    position: relative
+    display: flex
+    flex-direction: column
+    &:hover
+      .carousel-services-second-image
+        opacity: 1
+    .carousel-logo
+      text-align: center
+      img
+        width: 140px
+        height: auto
+        display: inline-block
+        margin-top: -30px
       
+  .owl-item
+    &:nth-child(2n+2)
+      .carousel-services-second-item
+        flex-direction: column-reverse
+  &-image
+    background-size: cover
+    background-position: center
+    opacity: .3
+    transition: opacity .5s ease 
+    
+  &-content
+    position: relative
+    padding: 60px 10%
+
+  &-composition
+    margin: auto
+    text-align: center
+    width: 100%
+    h3
+      font-family: raleway
+      text-transform: uppercase
+      font-weight: 800
+      font-size: 28px
+      margin-top: 5px
+      margin-bottom: 20px
+  
+  &-list
+    margin: 0
+    padding: 0
+    list-style-type: none
+    margin-bottom: 25px
+    li
+      padding: 9px
+      border-bottom: 1px solid rgba(#fff, .2)
+      &:last-child
+        border-bottom: none
+      strong
+        font-family: firasans, sans-serif
+        color: #4A4A4A
+      .fas
+        font-size: 14px
+      
+
 @import "media" // Всегда в конце
