@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var $menu = $('#my-menu').mmenu({
       extensions: ['widescreen', 'theme-black', 'effect-menu-slide', 'pagedim-black', 'position-right',],
       navbar: {
-        title: '<img src="img/logo/Jack Heorhiian (3).png" alt="Logo">'
+        title: '<img src="img/Jack Heorhiian (3).png" alt="Logo">'
       }
     });
     
@@ -103,4 +103,70 @@ $(document).ready(function() {
   
   window.onresize = function () {onResizeSecond()};
   
+  $('.reviews').owlCarousel({
+    loop: true,
+    items: 1,
+    smartSpeed: 700,
+    autoHeight: true
+  });
+  
+  //E-mail Ajax Send
+	$("form.callback").submit(function() { //Change
+		var th = $(this);
+		$.ajax({
+			type: "POST",
+			url: "mail.php", //Change
+			data: th.serialize()
+		}).done(function() {
+			$(th).find('.success').addClass('active').css('display','flex').hide().fadeIn();
+			setTimeout(function() {
+                $(th).find('.success').removeClass('active').fadeOut();
+				th.trigger("reset");
+			}, 3000);
+		});
+		return false;
+	});
+  
+  //To top
+  $(window).scroll(function(){
+    if($(this).scrollTop() > $(this).height()){
+        $('.top').addClass('active');
+      }
+    else{
+      $('.top').removeClass('active');
+    }
+  });
+  
+  $('.top').click(function(){
+    $('html, body').stop().animate({scrollTop: 0},'slow','swing');
+  });
+  
+  function scrollToAnchor(aid){
+    var aTag = $("[name='"+ aid +"']");
+    $('html,body').animate({scrollTop: aTag.offset().top},'slow');
+  }
+
+  $("#link").click(function(){
+    scrollToAnchor('about');
+  });
+  $("#link1").click(function(){
+    scrollToAnchor('about');
+  });
+  $("#projects").click(function(){
+    scrollToAnchor('projects');
+  });
+  $("#feedbacks").click(function(){
+    scrollToAnchor('feedbacks');
+  });
+  $("#services").click(function(){
+    scrollToAnchor('services');
+  });
+  $("#submit").click(function(){
+    scrollToAnchor('submit');
+  });
+  
+});
+
+$(window).on('load',function(){
+  $('.preloader').delay(1000).fadeOut('slow');
 });

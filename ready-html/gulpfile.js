@@ -8,6 +8,7 @@ var gulp           = require('gulp'),
 		rename         = require('gulp-rename'),
 		del            = require('del'),
 		imagemin       = require('gulp-imagemin'),
+        pngquant	   = require('imagemin-pngquant'),
 		cache          = require('gulp-cache'),
 		autoprefixer   = require('gulp-autoprefixer'),
 		ftp            = require('vinyl-ftp'),
@@ -68,8 +69,13 @@ gulp.task('watch', ['sass', 'js', 'browser-sync'], function() {
 });
 
 gulp.task('imagemin', function() {
-	return gulp.src('app/img/**/*')
-	.pipe(cache(imagemin())) // Cache Images
+	return gulp.src('app/img/**/*.jpg')
+	.pipe(cache(imagemin({
+		interlaced: true,
+		progressive: true,
+		svgoPlugins: [{removeViewBox: false}],
+		use: [pngquant()]
+	}))) // Cache Images
 	.pipe(gulp.dest('dist/img')); 
 });
 
